@@ -1,0 +1,47 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "TileMap",
+"class": "Grid",
+"language": "GDScript",
+"path": "res://entities/grid/Grid.gd"
+}, {
+"base": "Sprite",
+"class": "Player",
+"language": "GDScript",
+"path": "res://entities/snakeHead/Player.gd"
+}, {
+"base": "Node",
+"class": "PlayerInput",
+"language": "GDScript",
+"path": "res://entities/snakeHead/Input.gd"
+}, {
+"base": "Node2D",
+"class": "SnakeHead",
+"language": "GDScript",
+"path": "res://entities/snakeHead/SnakeHead.gd"
+} ]
+_global_script_class_icons={
+"Grid": "",
+"Player": "",
+"PlayerInput": "",
+"SnakeHead": ""
+}
+
+[application]
+
+config/name="SnakeGame"
+run/main_scene="res://entities/main/Main.tscn"
+config/icon="res://icon.png"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
