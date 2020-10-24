@@ -65,6 +65,7 @@ func move_snake(snake, direction):
 	grid[pos.x][pos.y] = snake
 	snake.position = map_to_world(pos)
 
+# Função boleana se a entidade está ou não na tela
 func is_cell_inside_the_screen(cell_pos):
 	if(cell_pos.x < grid_size.x and cell_pos.x >= 0 \
 		and cell_pos.y < grid_size.y and cell_pos.y >= 0):
@@ -72,6 +73,7 @@ func is_cell_inside_the_screen(cell_pos):
 	else:
 		return false
 
+# Posiciona em uma posição randomica
 func set_at_random_position(entity: Node2D):
 	var has_random_pos= false
 	var random_grid_pos: Vector2
@@ -84,6 +86,7 @@ func set_at_random_position(entity: Node2D):
 	
 	place_entity(entity, random_grid_pos)
 
+# Movimenta uma entidade
 func move_to_position(entity: Node2D, new_pos: Vector2):
 	var old_position = world_to_map(entity.position)
 	var new_position = world_to_map(new_pos)

@@ -22,23 +22,28 @@ func _ready():
 	emit_signal("size_of_snake_changed", snake_body.size())
 
 func _process(delta):
+	# Para ter um 'delay' no movimento
 	if(delta_counter > 20):
 		if direction != Vector2():
 			var old_position_of_body_in_front: Vector2 = self.position
+			# Emite o sinal para movimentar a cobrinha
 			emit_signal("move", self, direction)
 			if snake_body.size() > 1:
 				for i in range(1, snake_body.size()):
 					var temp_pos: Vector2 = snake_body[i].position
+					# Emite o sinal para movimentar o corpo da cobrinha
 					emit_signal("snake_body_move", snake_body[i], old_position_of_body_in_front)
 					old_position_of_body_in_front = temp_pos
 		delta_counter = 0
 			
 	delta_counter += 1
 
+# Quando é detectado o input de uma tecla
 func _on_Player_input_detected(new_direction):
 	if new_direction != direction * -1:
 		direction = new_direction
 
+# Lógica de quando come um alimento
 func earn_points():
 	var snake_body_instance: Node2D = scene_snake_body.instance() as Node2D
 	snake_body.append(snake_body_instance)

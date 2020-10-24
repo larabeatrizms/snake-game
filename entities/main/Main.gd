@@ -4,12 +4,14 @@ extends Node
 const food = preload("res://entities/food/Food.tscn")
 const snake = preload("res://entities/snakeHead/SnakeHead.tscn")
 
+# Grid
 onready var grid: Grid = get_node("Grid") as Grid
 
 # Player
 var snake_head: Node2D
 
 # Inicialização de entidades
+# Conecta aos sinais e adiciona entidades na tela
 func setup():
 	snake_head = snake.instance() as Node2D
 	snake_head.connect("move", self, "_on_SnakeHead_move")
@@ -28,9 +30,11 @@ func _ready():
 	randomize()
 	setup()
 
+# Movimenta a cobrinha
 func _on_SnakeHead_move(snake, direction):
 	grid.move_snake(snake, direction)
 
+# Quando é recebido o sinal de gameover
 func _on_Grid_game_over():
 	var entities_snake = get_tree().get_nodes_in_group("Player")
 	for entity in entities_snake:
@@ -41,6 +45,7 @@ func _on_Grid_game_over():
 	
 	setup()
 
+# Quando come o alimento
 func _on_Grid_earn_points(food_entity, entity):
 	if entity.has_method("earn_points"):
 		entity.earn_points()
@@ -49,12 +54,15 @@ func _on_Grid_earn_points(food_entity, entity):
 		add_child_below_node(snake_head, food_node)
 		grid.set_at_random_position(food_node)
 
+# Quando o tamanho da cobrinha aumenta
 func _on_Snake_increases(snake_body: Node2D, snake_body_position: Vector2):
 	add_child_below_node(snake_head, snake_body)
 	grid.place_entity(snake_body, grid.world_to_map(snake_body_position))
 	
+# Movimentação do corpo da cobrinha
 func _on_Snake_body_move(snake_body: Node2D, snake_body_position: Vector2) -> void:
 	grid.move_to_position(snake_body, snake_body_position)
 
+# Quando o tamanho da cobrinha muda
 func _on_Size_of_snake_changed(points: int):
 	$MainHud/Points.set_text(str(points))

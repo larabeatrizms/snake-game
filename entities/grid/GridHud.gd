@@ -1,7 +1,9 @@
 extends Node2D
 
+# Grid
 onready var grid: Grid = get_parent() as Grid
 
+# Desenha o grid
 func _draw():
 	var line: int = 2
 	var line_color: Color

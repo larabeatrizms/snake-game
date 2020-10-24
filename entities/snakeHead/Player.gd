@@ -2,6 +2,8 @@ extends Sprite
 
 class_name Player
 
+# Detecta alguma tecla
+
 signal input_detected(direction)
 
 func _input(event):
