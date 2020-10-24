@@ -7,9 +7,10 @@ signal game_over
 signal earn_points(food_entity, entity)
 
 # Variáveis
-onready var grid_size = Vector2(32, 20)
+onready var grid_size = Vector2(32, 18)
 var grid: Array
 
+# Inicializa o Grid
 func setup_grid(): 
 	grid = []
 	
@@ -18,6 +19,7 @@ func setup_grid():
 		for y in range(grid_size.y):
 			grid[x].append(null)
 
+# Função auxiliar q Coloca entidade em uma posição
 func set_object_in_position(entity, grid_pos):
 	grid[grid_pos.x][grid_pos.y] = entity	
 
@@ -29,7 +31,6 @@ func place_entity(entity, grid_pos):
 	set_object_in_position(entity, grid_pos)
 	entity.set_position(map_to_world(grid_pos))
 
-# Inicializa o Grid
 func _ready():
 	setup_grid()
 
@@ -38,21 +39,21 @@ func _ready():
 # se a próxima posição é o do grupo Player ou Food
 func move_snake(snake, direction):
 	var temp_aux: Vector2
-	var new_grid_pos: Vector2 = world_to_map(snake.position) + direction
+	var old_position = world_to_map(snake.position)
+	var pos: Vector2 = old_position + direction
 	
 	# Quando atravessa a parede
-	if !is_cell_inside_the_screen(new_grid_pos):
-		if new_grid_pos.x >= grid_size.x:
-			temp_aux = Vector2(0, new_grid_pos.y)
-		if new_grid_pos.x < 0:
-			temp_aux = Vector2(grid_size.x - 1, new_grid_pos.y)
-		if new_grid_pos.y >= grid_size.y:
-			temp_aux = Vector2(new_grid_pos.x, 0)
-		if new_grid_pos.y < 0:
-			temp_aux = Vector2(new_grid_pos.x, grid_size.y - 1)
-		new_grid_pos = temp_aux
-	
-	var object_in_position: Node2D = get_object_of_position(new_grid_pos)
+	if !is_cell_inside_the_screen(pos):
+		if pos.x >= grid_size.x:
+			temp_aux = Vector2(0, pos.y)
+		if pos.x < 0:
+			temp_aux = Vector2(grid_size.x - 1, pos.y)
+		if pos.y >= grid_size.y:
+			temp_aux = Vector2(pos.x, 0)
+		if pos.y < 0:
+			temp_aux = Vector2(pos.x, grid_size.y - 1)
+		pos = temp_aux
+	var object_in_position: Node2D = get_object_of_position(pos)
 	if object_in_position != null:
 		if object_in_position.is_in_group("Player"):
 			setup_grid()
@@ -60,10 +61,9 @@ func move_snake(snake, direction):
 			return
 		elif object_in_position.is_in_group("Food"):
 			emit_signal("earn_points", object_in_position, snake)
-	
-	grid[world_to_map(snake.position).x][world_to_map(snake.position).y] = null
-	grid[new_grid_pos.x][new_grid_pos.y] = snake
-	snake.position = map_to_world(new_grid_pos)
+	grid[old_position.x][old_position.y] = null
+	grid[pos.x][pos.y] = snake
+	snake.position = map_to_world(pos)
 
 func is_cell_inside_the_screen(cell_pos):
 	if(cell_pos.x < grid_size.x and cell_pos.x >= 0 \
@@ -84,10 +84,10 @@ func set_at_random_position(entity: Node2D):
 	
 	place_entity(entity, random_grid_pos)
 
-func move_to_position(entity: Node2D, new_pos: Vector2) -> void:
-	var old_grid_position: Vector2 = world_to_map(entity.position)
-	var new_grid_position: Vector2 = world_to_map(new_pos)
+func move_to_position(entity: Node2D, new_pos: Vector2):
+	var old_position = world_to_map(entity.position)
+	var new_position = world_to_map(new_pos)
 	
-	set_object_in_position(null, old_grid_position)
-	place_entity(entity, new_grid_position)
+	set_object_in_position(null, old_position)
+	place_entity(entity, new_position)
 	entity.set_position(new_pos)

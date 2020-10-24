@@ -17,7 +17,6 @@ signal size_of_snake_changed(length)
 const scene_snake_body = preload("res://entities/snakeBody/SnakeBody.tscn")
 onready var snake_body: Array = [self]
 
-
 func _ready():
 	$Player.connect("input_detected", self, "_on_Player_input_detected")
 	emit_signal("size_of_snake_changed", snake_body.size())
@@ -43,6 +42,5 @@ func _on_Player_input_detected(new_direction):
 func earn_points():
 	var snake_body_instance: Node2D = scene_snake_body.instance() as Node2D
 	snake_body.append(snake_body_instance)
-	
 	emit_signal("snake_increases", snake_body_instance, snake_body[-2].position)
 	emit_signal("size_of_snake_changed", snake_body.size())

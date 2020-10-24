@@ -28,10 +28,6 @@ func _ready():
 	randomize()
 	setup()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _on_SnakeHead_move(snake, direction):
 	grid.move_snake(snake, direction)
 
