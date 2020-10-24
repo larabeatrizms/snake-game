@@ -37,6 +37,8 @@ func _ready():
 # Movimenta o player
 # Validações: próxima posição é dentro da janela, 
 # se a próxima posição é o do grupo Player ou Food
+# se for do grupo Player emite sinal gameover
+# se for do grupo Food emite sinal earn_points
 func move_snake(snake, direction):
 	var temp_aux: Vector2
 	var old_position = world_to_map(snake.position)
