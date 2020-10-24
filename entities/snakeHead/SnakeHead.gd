@@ -36,11 +36,9 @@ func _process(delta):
 			
 	delta_counter += 1
 
-
 func _on_Player_input_detected(new_direction):
 	if new_direction != direction * -1:
 		direction = new_direction
-	print(direction)
 
 func earn_points():
 	var snake_body_instance: Node2D = scene_snake_body.instance() as Node2D
