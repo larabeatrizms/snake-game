@@ -20,4 +20,3 @@ func _input(event):
 
 func _process(delta):
 	pass
-

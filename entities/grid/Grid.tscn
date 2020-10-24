@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://entities/grid/Grid.gd" type="Script" id=1]
+[ext_resource path="res://entities/grid/GridHud.gd" type="Script" id=2]
 
 [node name="Grid" type="TileMap"]
 cell_size = Vector2( 32, 32 )
 format = 1
 script = ExtResource( 1 )
+
+[node name="GridHud" type="Node2D" parent="."]
+script = ExtResource( 2 )

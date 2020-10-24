@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/snakeHead/Player.gd"
 }, {
-"base": "Node",
-"class": "PlayerInput",
-"language": "GDScript",
-"path": "res://entities/snakeHead/Input.gd"
-}, {
 "base": "Node2D",
 "class": "SnakeHead",
 "language": "GDScript",
@@ -32,7 +27,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Grid": "",
 "Player": "",
-"PlayerInput": "",
 "SnakeHead": ""
 }
 

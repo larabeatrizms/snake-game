@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://font/BebasNeue-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 56
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="MainHud" type="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Points" type="Label" parent="."]
+margin_left = 12.7279
+margin_top = -28.2842
+margin_right = 52.7279
+margin_bottom = 39.7158
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
